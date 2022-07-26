@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contenedor2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: contenedor2
+  template:
+    metadata:
+      labels:
+        app: contenedor2
+    spec:
+      containers:
+      - name: contenedor2
+        image: contenedor2:latest
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "700m"
+        ports:
+        - containerPort: 9000
+        env:
+        - name: PORT
+          value: "9000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: contenedor2
+spec:
+  selector:
+    app: contenedor2
+  ports:
+  - port: 6001
+    targetPort: 9000
+  externalTrafficPolicy: Local
+  type: LoadBalancer
+        

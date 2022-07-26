@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  contenedor1:
+    build: ./contenedor1
+    ports:
+      - "8000:8000"
+    image: contenedor1
+  contenedor2:
+    build: ./contenedor2
+    ports:
+      - "9000:9000"
+    environment:
+      - "PORT=9000"
+    image: contenedor2
