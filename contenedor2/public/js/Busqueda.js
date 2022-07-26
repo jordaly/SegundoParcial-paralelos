@@ -1,27 +1,12 @@
-// ESTO HAY QUE CAMBIARLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+const array = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+const array2 = ["2", "1", "3", "6", "5", "10", "9", "7", "8", "4"];
 
 
+console.log('Mi arreglo: ' + JSON.stringify(array))
 
 
-
-
-
-
-
-
-// DECLARO UN ARRAY CON LAS LETRAS DEL ABECEDARIO //
-const array = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","u","v","w","x","y","z"];
-const array2 = ["q","p","i","r","c","z","w","u","e","a","y","l","v","n","f","x","j","d","s","m","b","g","k","h","o"];
-
-// IMPRIMO MI ARRAY //
-console.log('Mi array: '+JSON.stringify(array))
-
-/**---------------------------------
- * ! ALGORITMO DE BUSQUEDA BINARIA
- * @param {*} array
- * @param {*} letter
-------------------------------------*/
-const BusquedaBinaria = (array, letter) => {
+const BusquedaBinaria = (array, number) => {
 
     let low = 0;
 
@@ -33,13 +18,13 @@ const BusquedaBinaria = (array, letter) => {
 
         let mid = array[i];
 
-        if (mid == String(letter).toLowerCase()) {
+        if (mid == String(number)) {
 
-            return 'La letra '+String(letter).toUpperCase()+' ha sido encontrada en la posicion '+i+' del array';
+            return 'La numero ' + String(number) + ' ha sido encontrada en la posicion ' + i + ' del arreglo';
 
         }
 
-        if (mid > String(letter).toLowerCase()) {
+        if (mid > String(number)) {
 
             high = i - 1;
 
@@ -55,70 +40,50 @@ const BusquedaBinaria = (array, letter) => {
 
 }
 
-/**--------------------------------------------------
- * ! ALGORITMO DE BUSQUEDA POR METODO DE LA BURBUJA
- * @param {*} array
- * @param {*} letter
------------------------------------------------------*/
-const BusquedaBurbuja = (array2, letter) => {
 
-    var n, i, k, aux;
+const BusquedaBurbuja = (array2, number) => {
 
+    var n, i;
     n = array2.length;
+    for (i = 0; i < n; i++) {
+        if (array2[i] == String(number)) {
 
-    for (k = 1; k < n; k++) {
-
-        for (i = 0; i < (n - k); i++) {
-
-            if (array2[i] > array2[i + 1]) {
-
-                aux = array2[i];
-
-                array2[i] = array2[i + 1];
-
-                array2[i + 1] = aux;
-
-                if(array2[i] == String(letter).toLowerCase()){
-
-                    console.log('Array Desorganizado: '+ JSON.stringify(array2))
-                    return 'La letra '+String(letter).toUpperCase()+' ha sido encontrada en la posicion '+i+' del array';
-    
-                }
-
-            }
+            console.log('Arreglo Desorganizado: ' + JSON.stringify(array2))
+            return 'La numero ' + String(number) + ' ha sido encontrada en la posicion ' + i + ' del arreglo';
 
         }
-
     }
+
+
 
 }
 
-// INICIALIZO LA letIABLE letter //
-let letter = '';
 
-// DECLARO UNA EXPRESION REGULAR //
-const regex = new RegExp('[a-zA-Z]');
+let number = '';
 
-// HAGO UN DO WHILE //
-do{
-    
-    // LE PIDO UNA LETRA AL USUARIO //
-    letter = prompt('Escriba una letra')
 
-    // PREGUNTO SI LO QUE SE ESCRIBIO ES UNA LETRA //
-    if(regex.test(letter) && letter.length == 1){
+const regex = new RegExp('[0-9]');
 
-        // SI ES ASI ENTONCES IMPRIMO Y LLAMO LAS FUNCIONES DE BUSQUEDA //
-        console.log('Busqueda Binaria: '+BusquedaBinaria(array, letter))
-        
-        console.log('Busqueda por el Metodo Burbuja: '+BusquedaBurbuja(array2, letter))
+
+do {
+
+
+    number = prompt('Escriba un numero del 1 al 10')
+
+
+    if (regex.test(number) && (number < 11 && number > 0)) {
+
+
+        console.log('Busqueda Binaria: ' + BusquedaBinaria(array, number))
+
+        console.log('Busqueda por el Metodo Burbuja: ' + BusquedaBurbuja(array2, number))
 
     } else {
 
-        alert('Debe escribir una letra del abecedario')
-        letter = ''
+        alert('Debe escribir un numero del 1 al 10');
+        number = ''
 
     }
 
-} while(!regex.test(letter) && letter.length != 1);
+} while (!regex.test(number) && (number < 11 && number > 0));
 

@@ -1,38 +1,18 @@
-// ESTO HAY QUE CAMBIARLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 
+const array = ["1","2","3","4","5","6","7","8","9","10"];
+
+console.log('Mi arreglo: '+JSON.stringify(array))
 
 
-
-
-
-
-
-
-
-
-
-
-
-// DECLARO UN ARRAY CON LAS LETRAS DEL ABECEDARIO //
-const array = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","u","v","w","x","y","z"];
-
-// IMPRIMO MI ARRAY //
-console.log('Mi array: '+JSON.stringify(array))
-
-/**------------------------------------
- * ! ALGORITMO DE BUSQUEDA SECUENCIAL
- * @param {*} array
- * @param {*} letter
----------------------------------------*/
-const BusquedaSecuencial = (array, letter) => {
+const BusquedaSecuencial = (array, number) => {
 
     for (let i = 0; i < array.length; i++) {
 
-        if (array[i] == String(letter).toLowerCase()) {
+        if (array[i] == String(number)) {
 
-            return 'La letra '+String(letter).toUpperCase()+' ha sido encontrada en la posicion '+i+' del array';
+            return 'La numero '+String(number)+' ha sido encontrada en la posicion '+i+' del arreglo';
 
         }
 
@@ -40,12 +20,8 @@ const BusquedaSecuencial = (array, letter) => {
 
 }
 
-/**------------------------------------
- * ! ALGORITMO DE BUSQUEDA POR SALTOS
- * @param {*} array
- * @param {*} letter
----------------------------------------*/
-const BusquedaPorSalto = (array, letter) => {
+
+const BusquedaPorSalto = (array, number) => {
     
     const length = array.length;
 
@@ -53,7 +29,7 @@ const BusquedaPorSalto = (array, letter) => {
 
     let i = 0;
 
-    while (array[Math.min(step, length) - 1] < String(letter).toLowerCase()) {
+    while (array[Math.min(step, length) - 1] < String(number)) {
         i = step;
         step += step;
         if (i >= length) {
@@ -63,47 +39,47 @@ const BusquedaPorSalto = (array, letter) => {
 
     let upperBound = Math.min(step, length);
 
-    while (array[i] < String(letter).toLowerCase()) {
+    while (array[i] < String(number)) {
         i++;
         if (i == upperBound) {
             return;
         }
     }
 
-    if (array[i] == String(letter).toLowerCase()) {
-        return 'La letra '+String(letter).toUpperCase()+' ha sido encontrada en la posicion '+i+' del array';
+    if (array[i] == String(number)) {
+        return 'La numero '+String(number)+' ha sido encontrada en la posicion '+i+' del arreglo';
     }
 
     return;
 
 }
 
-// INICIALIZO LA letIABLE letter //
-let letter = '';
 
-// DECLARO UNA EXPRESION REGULAR //
-const regex = new RegExp('[a-zA-Z]');
+let number = '';
 
-// HAGO UN DO WHILE //
+
+const regex = new RegExp('[0-9]');
+
+
 do{
     
-    // LE PIDO UNA LETRA AL USUARIO //
-    letter = prompt('Escriba una letra')
+    
+    number = prompt('Escriba un numero entre 1 y 10');
 
-    // PREGUNTO SI LO QUE SE ESCRIBIO ES UNA LETRA //
-    if(regex.test(letter) && letter.length == 1){
+    
+    if(regex.test(number) && (number<11 && number>0)){
 
-        // SI ES ASI ENTONCES IMPRIMO Y LLAMO LAS FUNCIONES DE BUSQUEDA //
-        console.log('Busqueda Secuencial: '+BusquedaSecuencial(array, letter))
+        
+        console.log('Busqueda Secuencial: '+BusquedaSecuencial(array, number));
 
-        console.log('Busqueda Por Saltos: '+BusquedaPorSalto(array, letter))
+        console.log('Busqueda Por Saltos: '+BusquedaPorSalto(array, number));
 
     } else {
 
-        alert('Debe escribir una letra del abecedario')
-        letter = ''
+        alert('Debe escribir un numero entre 1 y 10');
+        number = '';
 
     }
 
-} while(!regex.test(letter) && letter.length != 1);
+} while(!regex.test(number) && (number<11 && number>0));
 
